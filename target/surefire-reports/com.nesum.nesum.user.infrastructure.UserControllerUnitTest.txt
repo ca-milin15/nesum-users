@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.nesum.nesum.user.infrastructure.UserControllerUnitTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! - in com.nesum.nesum.user.infrastructure.UserControllerUnitTest
+userCreateProcessTestFail  Time elapsed: 0.007 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected com.nesum.nesum.user.application.exception.UserFieldsRuntimeException to be thrown, but nothing was thrown.
+	at com.nesum.nesum.user.infrastructure.UserControllerUnitTest.userCreateProcessTestFail(UserControllerUnitTest.java:37)
+
+userCreateProcessTestOk  Time elapsed: 0.007 s  <<< FAILURE!
+org.opentest4j.MultipleFailuresError: 
+Multiple Failures (1 failure)
+	org.opentest4j.AssertionFailedError: expected: not <null>
+	at com.nesum.nesum.user.infrastructure.UserControllerUnitTest.userCreateProcessTestOk(UserControllerUnitTest.java:47)
+

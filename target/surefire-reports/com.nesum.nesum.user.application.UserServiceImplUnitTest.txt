@@ -1,0 +1,15 @@
+-------------------------------------------------------------------------------
+Test set: com.nesum.nesum.user.application.UserServiceImplUnitTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.125 s <<< FAILURE! - in com.nesum.nesum.user.application.UserServiceImplUnitTest
+userCreateProcessTestFail  Time elapsed: 0.103 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown ==> expected: <com.nesum.nesum.user.application.exception.UserFieldsRuntimeException> but was: <java.lang.UnsupportedOperationException>
+	at com.nesum.nesum.user.application.UserServiceImplUnitTest.userCreateProcessTestFail(UserServiceImplUnitTest.java:41)
+Caused by: java.lang.UnsupportedOperationException: Unimplemented method 'userCreateProcess'
+	at com.nesum.nesum.user.application.UserServiceImplUnitTest.lambda$userCreateProcessTestFail$0(UserServiceImplUnitTest.java:42)
+	at com.nesum.nesum.user.application.UserServiceImplUnitTest.userCreateProcessTestFail(UserServiceImplUnitTest.java:41)
+
+userCreateProcessTestOk  Time elapsed: 0.02 s  <<< ERROR!
+java.lang.UnsupportedOperationException: Unimplemented method 'userCreateProcess'
+	at com.nesum.nesum.user.application.UserServiceImplUnitTest.userCreateProcessTestOk(UserServiceImplUnitTest.java:49)
+
