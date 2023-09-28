@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.nesum.nesum.user.application.dto.PhoneDTO;
 import com.nesum.nesum.user.application.dto.UserDTO;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
 import com.nesum.nesum.user.application.exception.UserFieldsRuntimeException;
@@ -54,10 +57,11 @@ public class UserControllerUnitTest {
     }
 
     public static UserDTO createOkUserDTOObject() {
-        return new UserDTO("camilo", "camilo@dominio.cl", "password", false);
+        var phoneList = List.of(new PhoneDTO("312222", "34", "34"));
+        return new UserDTO("camilo", "camilo@dominio.cl", "password", false, phoneList);
     }
 
     public static UserDTO createWrongUserDTOObject() {
-        return new UserDTO(null, null, null, false);
+        return new UserDTO(null, null, null, false, null);
     }
 }
