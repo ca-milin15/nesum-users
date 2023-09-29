@@ -70,7 +70,7 @@ public class UserControllerUnitTest {
     public static UserDTO createOkUserDTOObject() {
         var phoneList = List.of(new PhoneDTO("3122222", "34", "34"));
         return new UserDTO("UUID", LocalDateTime.now().toString(), LocalDateTime.now().toString(),
-            "camilo Rivera", "camiloriveraa@dominio.cl", "passwordpassword", false, phoneList);
+            "camilo Rivera", "camilori@dominio.cl", "passwordpassw", false, phoneList);
     }
 
     public static UserDTO createWrongUserDTOObject() {

@@ -2,6 +2,7 @@ package com.nesum.nesum.user.application.dto;
 
 import static com.nesum.nesum.shared.infrastructure.StaticConstants.EMAIL_FORMAT_REGEX;
 import static com.nesum.nesum.shared.infrastructure.StaticConstants.ONLY_TEXT_REGEX;
+import static com.nesum.nesum.shared.infrastructure.StaticConstants.PASSWORD_REGEX;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class UserDTO extends GenericEntityDTO {
 
 	@NotEmpty
     @Size(min = 10, max = 150)
-    @NotEmpty
+	@Pattern(regexp = PASSWORD_REGEX )
     String password;
 
     boolean isActive;
