@@ -1,7 +1,6 @@
 package com.nesum.nesum.shared.infrastructure;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,8 +37,8 @@ public class ControllerAdvice {
 													WebRequest request) {
         FieldError fieldError = ex.getFieldError();
 		return new ErrorOutDTO(String.format(METHOD_EXCEPTION_MESSAGE_FORMAT, 
-            ObjectUtils.isEmpty(fieldError) ? "" : fieldError.getField(), 
-            ObjectUtils.isEmpty(fieldError) ? "" : fieldError.getDefaultMessage())
+            fieldError.getField(), 
+            fieldError.getDefaultMessage())
         );
 	}
 }

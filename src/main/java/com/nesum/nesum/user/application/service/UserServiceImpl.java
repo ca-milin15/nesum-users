@@ -8,6 +8,7 @@ import com.nesum.nesum.shared.infrastructure.SystemMessage;
 import com.nesum.nesum.user.application.dto.UserDTO;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
 import com.nesum.nesum.user.application.exception.DataIntegrityCustomRuntimeException;
+import com.nesum.nesum.user.application.exception.TransactionalErrorRuntimeException;
 import com.nesum.nesum.user.domain.User;
 import com.nesum.nesum.user.infrastructure.repository.UserRepository;
 
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService{
             throw new DataIntegrityCustomRuntimeException(systemMessage.getError().getEmailConstraintError());
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new RuntimeException(systemMessage.getError().getGeneralTransactionalError());
+            throw new TransactionalErrorRuntimeException(systemMessage.getError().getGeneralTransactionalError());
         }
     }
     

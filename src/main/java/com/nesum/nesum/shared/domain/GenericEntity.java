@@ -8,11 +8,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
-@Setter
 @MappedSuperclass
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 public class GenericEntity {

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,8 +25,8 @@ import com.nesum.nesum.shared.infrastructure.SystemMessage;
 import com.nesum.nesum.shared.infrastructure.TestConfig;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
 import com.nesum.nesum.user.application.exception.DataIntegrityCustomRuntimeException;
+import com.nesum.nesum.user.application.exception.TransactionalErrorRuntimeException;
 import com.nesum.nesum.user.application.service.UserServiceImpl;
-import com.nesum.nesum.user.domain.User;
 import com.nesum.nesum.user.infrastructure.UserControllerUnitTest;
 import com.nesum.nesum.user.infrastructure.repository.UserRepository;
 
@@ -47,13 +47,24 @@ public class UserServiceImplUnitTest {
 
 
     @Test
-    @DisplayName("This method should fail because your fields are null")
-    void userCreateProcessTestFail() {
+    @DisplayName("This method should fail because userRepository.save() throws DataIntegrityViolationException")
+    void userCreateProcessTestFailByDataIntegrityViolationException() {
         var userDTOWrong = UserControllerUnitTest.createWrongUserDTOObject();
         when(jwtTokenServiceImplMocked.generateToken(userDTOWrong)).thenReturn("token");
         when(userRepositoryMocked.save(any())).thenThrow(DataIntegrityViolationException.class);
         when(systemMessageMocked.getError()).thenReturn(TestConfig.initializeSystemMessage());
         assertThrows(DataIntegrityCustomRuntimeException.class,
+            () -> userServiceImpl.userCreateProcess(userDTOWrong));
+    }
+
+    @Test
+    @DisplayName("This method should fail because userRepository.save() throws ConstrationException")
+    void userCreateProcessTestFailByGeneralException() {
+        var userDTOWrong = UserControllerUnitTest.createWrongUserDTOObject();
+        when(jwtTokenServiceImplMocked.generateToken(userDTOWrong)).thenReturn("token");
+        when(userRepositoryMocked.save(any())).thenThrow(ConstraintViolationException.class);
+        when(systemMessageMocked.getError()).thenReturn(TestConfig.initializeSystemMessage());
+        assertThrows(TransactionalErrorRuntimeException.class,
             () -> userServiceImpl.userCreateProcess(userDTOWrong));
     }
 
@@ -77,8 +88,20 @@ public class UserServiceImplUnitTest {
         verify(userRepositoryMocked, times(1)).save(any());
     }
 
-    public static User createUserDomainObject() {
-        return new User("Camilo", "camilo@gmail.com", "token", "token", LocalDateTime.now(), false, null);
+    @Test
+    @DisplayName("This method check the correct work of 'User.convertToUserResponseDTO' method when attributes are ok")
+    void userConvertMethodTestOk() {
+        var userDTOOk = UserControllerUnitTest.createOkUserDTOObject();
+        var userDomainOk = userDTOOk.convertToEntity("token");
+        assertInstanceOf(UserResponseDTO.class, userDomainOk.convertToUserResponseDTO());
+    }
+
+    @Test
+    @DisplayName("This method check the correct work of 'User.convertToUserResponseDTO' method when attributes are null")
+    void userConvertMethodWithAttrEmptyTestOk() {
+        var userDTOOk = UserControllerUnitTest.createWrongUserDTOObject();
+        var userDomainOk = userDTOOk.convertToEntity("token");
+        assertInstanceOf(UserResponseDTO.class, userDomainOk.convertToUserResponseDTO());
     }
     
 }

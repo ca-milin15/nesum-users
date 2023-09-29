@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.nesum.nesum.user.application.dto.PhoneDTO;
 import com.nesum.nesum.user.application.dto.UserDTO;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
-import com.nesum.nesum.user.application.exception.UserFieldsRuntimeException;
+import com.nesum.nesum.user.application.exception.DataIntegrityCustomRuntimeException;
 import com.nesum.nesum.user.application.service.UserServiceImpl;
 import com.nesum.nesum.user.infrastructure.controller.UserController;
 
@@ -41,7 +41,7 @@ public class UserControllerUnitTest {
     @Disabled("This test is disabled because the null fields is checked with @Validated is done in the integration test")
     @DisplayName("This method should fail because your fields are null")
     void userCreateProcessTestFail() {
-        assertThrows(UserFieldsRuntimeException.class, () -> userController.userCreateProcess(createWrongUserDTOObject()));
+        assertThrows(DataIntegrityCustomRuntimeException.class, () -> userController.userCreateProcess(createWrongUserDTOObject()));
         verify(userServiceImplMocked, times(1)).userCreateProcess(createWrongUserDTOObject());
     }
 

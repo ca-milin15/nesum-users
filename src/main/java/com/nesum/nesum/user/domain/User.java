@@ -17,20 +17,12 @@ import com.nesum.nesum.shared.domain.GenericEntity;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 
-@Getter
-@Setter
 @Entity
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "TBL_USER")
 public class User extends GenericEntity {
@@ -64,5 +56,21 @@ public class User extends GenericEntity {
             ObjectUtils.isEmpty(getModifiedDate()) ? "" : getModifiedDate().toString(),
             ObjectUtils.isEmpty(getLastLogin()) ? "" : getLastLogin().toString(), 
             getToken(), isActive());
+    }
+
+    public void setPhoneList(List<Phone> phoneList) {
+        this.phoneList = phoneList;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }

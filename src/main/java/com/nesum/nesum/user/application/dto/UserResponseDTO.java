@@ -4,13 +4,9 @@ import com.nesum.nesum.shared.application.dto.GenericEntityDTO;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserResponseDTO extends GenericEntityDTO{
     

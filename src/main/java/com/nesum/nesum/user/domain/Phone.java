@@ -10,19 +10,11 @@ import javax.persistence.Table;
 import com.nesum.nesum.shared.domain.GenericEntity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
 @Entity
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "TBL_USER_PHONE")
 public class Phone  extends GenericEntity{
