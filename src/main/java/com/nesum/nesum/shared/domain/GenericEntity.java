@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +26,10 @@ public class GenericEntity {
     @Column(name = "MODIFIED")
     LocalDateTime modifiedDate;
 
+    @PrePersist
+    public void prePersist() {
+        this.id = java.util.UUID.randomUUID().toString();
+        this.createdDate = LocalDateTime.now();
+        this.modifiedDate = LocalDateTime.now();
+    }
 }

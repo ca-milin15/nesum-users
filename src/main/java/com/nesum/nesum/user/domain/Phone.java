@@ -1,5 +1,6 @@
 package com.nesum.nesum.user.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,26 +10,32 @@ import javax.persistence.Table;
 import com.nesum.nesum.shared.domain.GenericEntity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "TBL_USER_PHONE")
 public class Phone  extends GenericEntity{
     
-    @Column(name = "NUMBER")
+    @Column(name = "NUMBER", length = 30)
     String number;
     
-    @Column(name = "CITY_CODE")
+    @Column(name = "CITY_CODE", length = 10)
     String cityCode;
     
-    @Column(name = "COUNTRY_CODE")
+    @Column(name = "COUNTRY_CODE", length = 10)
     String countryCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     User user;
 }

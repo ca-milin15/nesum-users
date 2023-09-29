@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,13 +27,15 @@ public class UserControllerIntegrationTest {
     @DisplayName("This method check the correct work of 'userCreateProcess' end-point")
     void userCreateEndPointOkTest() throws Exception {
         var user = UserControllerUnitTest.createOkUserDTOObject();
+        var userAsString = objectMapper.writeValueAsString(user);
         mockMvc.perform(
             MockMvcRequestBuilders.post("/user")
-                .content(objectMapper.writeValueAsString(user))
+                .content(userAsString)
                 .contentType("application/json"))
         .andExpect(MockMvcResultMatchers.status().isCreated())
+        .andDo(MockMvcResultHandlers.print())
         .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.isActive", Matchers.is(true)));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.active", Matchers.is(true)));
     }
 
     @Test
@@ -66,6 +69,6 @@ public class UserControllerIntegrationTest {
                 .content(objectMapper.writeValueAsString(user))
                 .contentType("application/json"))
         .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.mensaje", Matchers.is("El correo ya registrado")));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.mensaje", Matchers.is("El correo ya registrado.")));
     }
 }

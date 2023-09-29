@@ -59,8 +59,8 @@ public class UserServiceImplUnitTest {
         verify(userRepositoryMocked, times(1)).save(createUserDomainObject());
     }
 
-    private User createUserDomainObject() {
-        return new User("Camilo", "camilo@gmail.com", "token", LocalDateTime.now(), false, null);
+    public static User createUserDomainObject() {
+        return new User("Camilo", "camilo@gmail.com", "token", "token", LocalDateTime.now(), false, null);
     }
     
 }

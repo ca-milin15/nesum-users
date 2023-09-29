@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -58,10 +59,11 @@ public class UserControllerUnitTest {
 
     public static UserDTO createOkUserDTOObject() {
         var phoneList = List.of(new PhoneDTO("312222", "34", "34"));
-        return new UserDTO("camilo", "camilo@dominio.cl", "password", false, phoneList);
+        return new UserDTO("UUID", LocalDateTime.now().toString(), LocalDateTime.now().toString(),
+            "camilo Rivera", "camiloriveraa@dominio.cl", "passwordpassword", false, phoneList);
     }
 
     public static UserDTO createWrongUserDTOObject() {
-        return new UserDTO(null, null, null, false, null);
+        return new UserDTO(null, null, null, null, null, null, false, null);
     }
 }
