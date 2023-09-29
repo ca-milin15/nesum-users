@@ -4,6 +4,7 @@ import static com.nesum.nesum.shared.infrastructure.StaticConstants.EMAIL_FORMAT
 import static com.nesum.nesum.shared.infrastructure.StaticConstants.ONLY_TEXT_REGEX;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,7 +67,9 @@ public class UserDTO extends GenericEntityDTO {
                 .lastLogin(LocalDateTime.now())
                 .isActive(true)
                 .build();
-        user.setPhoneList(this.phones.stream().map(phoneDTO -> phoneDTO.convertToEntity(user)).collect(Collectors.toList()));
+        user.setPhoneList(this.phones != null && !this.phones.isEmpty() 
+            ? this.phones.stream().map(phoneDTO -> phoneDTO.convertToEntity(user)).collect(Collectors.toList())
+            : new ArrayList<>());
         return user;
     } 
 }

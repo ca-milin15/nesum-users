@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.util.ObjectUtils;
+
 import com.nesum.nesum.shared.domain.GenericEntity;
 import com.nesum.nesum.user.application.dto.UserResponseDTO;
 
@@ -57,8 +59,10 @@ public class User extends GenericEntity {
 
     public UserResponseDTO convertToUserResponseDTO() {
         return new UserResponseDTO(
-            getId(), getCreatedDate().toString(), 
-            getModifiedDate().toString(), getLastLogin().toString(), 
+            getId(), 
+            ObjectUtils.isEmpty(getCreatedDate()) ? "" : getCreatedDate().toString(), 
+            ObjectUtils.isEmpty(getModifiedDate()) ? "" : getModifiedDate().toString(),
+            ObjectUtils.isEmpty(getLastLogin()) ? "" : getLastLogin().toString(), 
             getToken(), isActive());
     }
 }

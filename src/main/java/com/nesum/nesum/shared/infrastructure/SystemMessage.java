@@ -23,7 +23,8 @@ public class SystemMessage {
     @Setter
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class Error {
-        public String dataIntegrityError;
-        public String emailConstraintError;
+        String dataIntegrityError;
+        String emailConstraintError;
+        String generalTransactionalError;
     }
 }

@@ -23,5 +23,6 @@ spring:
 
 system-messages:
   error:
+    general-transactional-error: "Se produjo un en la transacción."
     data-integrity-error: "Se produjo un error de integridad de datos."
     email-constraint-error: "El correo ya registrado."

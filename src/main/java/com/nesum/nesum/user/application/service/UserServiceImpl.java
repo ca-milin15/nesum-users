@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
             throw new DataIntegrityCustomRuntimeException(systemMessage.getError().getEmailConstraintError());
         } catch (Exception e) {
             log.error(e.getMessage());
-            throw new RuntimeException("Error al crear el usuario");
+            throw new RuntimeException(systemMessage.getError().getGeneralTransactionalError());
         }
     }
     
